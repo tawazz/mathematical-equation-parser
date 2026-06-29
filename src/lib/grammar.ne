@@ -1,0 +1,70 @@
+# JavaScript prelude: import the custom lexer
+@{%
+const lexer = require('./lexer');
+%}
+
+# Tell Nearley to use our custom lexer instead of the default
+@lexer lexer
+
+# Top-level rule: an expression is simply a comparison
+# The {% id %} just passes the comparison node through unchanged.
+expression -> comparison {% id %}
+
+# Comparison (equality / inequality) — lowest precedence
+# Matches an `addition` optionally followed by zero or more `(== or !=) addition`.
+# Comparisons are left-associative: `a == b != c` parses as `(a == b) != c`.
+comparison -> addition ((%eq | %neq) addition):* {%
+  function(d) {
+    // If no comparison operators found, return the left-hand addition as-is
+    if (d[1].length === 0) return d[0];
+    let result = d[0];
+    // Fold over each `(operator, right-hand-side)` pair
+    for (const item of d[1]) {
+      // item = [[token], addition_node] — alternation wraps in an extra array
+      const op   = item[0][0];
+      const right = item[1];
+      result = { type: 'comparison', operator: op.text, left: result, right };
+    }
+    return result;
+  }
+%}
+
+# Addition / subtraction — medium precedence 
+# Matches a `multiplication` optionally followed by zero or more `(+ or -) multiplication`.
+# Left-associative so `1 - 2 + 3` = `(1 - 2) + 3`.
+addition -> multiplication ((%plus | %minus) multiplication):* {%
+  function(d) {
+    // No operators → return the multiplication node as-is
+    if (d[1].length === 0) return d[0];
+    let result = d[0];
+    for (const item of d[1]) {
+      const op   = item[0][0];
+      const right = item[1];
+      result = { type: 'binary', operator: op.text, left: result, right };
+    }
+    return result;
+  }
+%}
+
+# Multiplication / division — higher precedence
+# Matches a `primary` optionally followed by zero or more `(* or /) primary`.
+# Left-associative so `4 / 2 * 3` = `(4 / 2) * 3`.
+multiplication -> primary ((%times | %divide) primary):* {%
+  function(d) {
+    if (d[1].length === 0) return d[0];
+    let result = d[0];
+    for (const item of d[1]) {
+      const op   = item[0][0];
+      const right = item[1];
+      result = { type: 'binary', operator: op.text, left: result, right };
+    }
+    return result;
+  }
+%}
+
+# Primary (atoms) — highest precedence
+# Two alternatives:
+#   1. A literal number              →  { type: 'number', value: <the number> }
+#   2. A parenthesised sub‑expression →  return the inner expression node
+primary -> %number {% function(d) { return { type: 'number', value: d[0].value }; } %}
+    | %lparen expression %rparen {% function(d) { return d[1]; } %}

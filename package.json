@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "build:grammar": "tsx node_modules/.bin/nearleyc src/lib/grammar.ne -o src/lib/grammar.js",
+    "start": "npm run build:grammar && tsx src/index.ts",
+    "test": "npm run build:grammar && jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testMatch": ["<rootDir>/test.ts"],
+    "moduleFileExtensions": ["ts", "js", "json"]
+  },
+  "dependencies": {
+    "moo": "^0.5.3",
+    "nearley": "^2.20.1"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.4.1",
+    "@types/moo": "^0.5.10",
+    "@types/nearley": "^2.11.5",
+    "@types/node": "^26.0.1",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.11",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
