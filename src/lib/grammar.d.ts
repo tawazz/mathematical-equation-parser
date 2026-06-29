@@ -1,4 +1,4 @@
 import type { CompiledGrammar } from 'nearley';
 
 declare const grammar: CompiledGrammar;
-export = grammar;
+export default grammar;

@@ -40,4 +40,4 @@ function createLexerWrapper(raw: moo.Lexer): moo.Lexer {
 
 const lexer = createLexerWrapper(rawLexer);
 
-export = lexer;
+export default lexer;

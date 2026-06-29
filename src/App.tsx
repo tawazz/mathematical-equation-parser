@@ -1,4 +1,4 @@
-import { Button, HStack } from "@chakra-ui/react/"
+import { Button, HStack } from "@chakra-ui/react"
 
 
 function App() {
