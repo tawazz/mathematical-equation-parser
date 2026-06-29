@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import { parse } from './src/index';
+import { parse } from '../src/lib/index';
 
 function assertSuccess(result: ReturnType<typeof parse>, expected: number | boolean) {
   expect(result.success).toBe(true);
