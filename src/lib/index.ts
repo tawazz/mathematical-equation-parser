@@ -22,7 +22,7 @@ interface ComparisonNode {
   right: ASTNode;
 }
 
-type ASTNode = NumberNode | BinaryNode | ComparisonNode;
+export type ASTNode = NumberNode | BinaryNode | ComparisonNode;
 
 // ── Parse result types ────────────────────────────────────────────────────────
 

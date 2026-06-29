@@ -1,6 +1,5 @@
 import {
   Box,
-  Code,
   HStack,
   Kbd,
   Separator,
@@ -8,6 +7,7 @@ import {
 } from '@chakra-ui/react'
 import { LuSquareCheckBig } from 'react-icons/lu'
 import type { ParseSuccess } from '../../lib'
+import { AstViewer } from './AstViewer'
 
 export const SuccessDisplay = ({ ast, result }: ParseSuccess) => {
   return (
@@ -19,7 +19,7 @@ export const SuccessDisplay = ({ ast, result }: ParseSuccess) => {
         </Box>
       </HStack>
       <Separator />
-      <Stack gap="3">
+      <Stack gap="5">
         <Box>
           <Box textStyle="sm" fontWeight="medium" color="colorPalette.fgMuted" mb="1">
             Evaluation Result
@@ -29,24 +29,10 @@ export const SuccessDisplay = ({ ast, result }: ParseSuccess) => {
           </Kbd>
         </Box>
         <Box>
-          <Box textStyle="sm" fontWeight="medium" color="colorPalette.fgMuted" mb="1">
+          <Box textStyle="sm" fontWeight="medium" color="colorPalette.fgMuted" mb="2">
             Abstract Syntax Tree (AST)
           </Box>
-          <Box
-            as="pre"
-            bg="bg.subtle"
-            borderWidth="1px"
-            rounded="l2"
-            p="4"
-            fontSize="xs"
-            fontFamily="monospace"
-            overflow="auto"
-            maxH="xs"
-          >
-            <Code variant="subtle" fontSize="xs">
-              {JSON.stringify(ast, null, 2)}
-            </Code>
-          </Box>
+          <AstViewer ast={ast} />
         </Box>
       </Stack>
     </Stack>
