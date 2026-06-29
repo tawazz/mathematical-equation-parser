@@ -1,6 +1,7 @@
+@preprocessor esmodule
 # JavaScript prelude: import the custom lexer
 @{%
-const lexer = require('./lexer');
+import lexer from './lexer';
 %}
 
 # Tell Nearley to use our custom lexer instead of the default
