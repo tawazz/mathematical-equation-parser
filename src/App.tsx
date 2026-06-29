@@ -1,7 +1,18 @@
 import { useState } from 'react'
-import { Box, Button, Center, Container, Flex, HStack, Heading, Textarea, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  Flex,
+  HStack,
+  Heading,
+  Textarea,
+  VStack,
+} from '@chakra-ui/react'
 import { LuArrowRight, LuSparkle } from 'react-icons/lu'
-import { parse } from './lib'
+import { parse, type ParseResult } from './lib'
+import { ResultDisplay } from './components/result/ResultDisplay'
 
 // block.tsx
 const prompts = [
@@ -19,21 +30,18 @@ const prompts = [
 
 export const App = () => {
   const [expression, setExpression] = useState('')
+  const [result, setResult] = useState<ParseResult | null>(null)
+
   const parseExpression = () => {
-    try {
-      const result = parse(expression)
-      if (result.success) {
-        console.log(`Result: ${result.result}`)
-        return `Result: ${result.result}`
-      } else {
-        console.log(`Error: ${result.error}`)
-        return `Error: ${result.error}`
-      }
-    } catch (error) {
-      console.log(`Error: ${(error as Error).message}`)
-      return `Error: ${(error as Error).message}`
-    }
+    const parsed = parse(expression)
+    setResult(parsed)
   }
+
+  const handlePromptClick = (text: string) => {
+    setExpression(text)
+    setResult(null)
+  }
+
   return (
     <Container maxW="4xl" height="full">
       <Center height="full">
@@ -69,29 +77,42 @@ export const App = () => {
               </HStack>
             </Box>
           </Box>
-          <Container maxW="2xl">
-            <Flex align="flex-start" gap="4">
-              <HStack
-                hideBelow="md"
-                flexShrink="0"
-                color="colorPalette.fg"
-                textStyle="sm"
-                pos="relative"
-                top="2"
-                fontWeight="medium"
+          {result ? (
+            <Container maxW="2xl">
+              <Box
+                borderWidth="1px"
+                rounded="l2"
+                p="6"
+                width="full"
               >
-                <LuSparkle />
-                Try these
-              </HStack>
-              <HStack wrap="wrap" colorPalette="gray" justify="center">
-                {prompts.map((prompt) => (
-                  <Button px="3" key={prompt.text} size="xs" rounded="full" variant="outline" onClick={() => setExpression(prompt.text)}>
-                    {prompt.text}
-                  </Button>
-                ))}
-              </HStack>
-            </Flex>
-          </Container>
+                <ResultDisplay result={result} />
+              </Box>
+            </Container>
+          ) : (
+            <Container maxW="2xl">
+              <Flex align="center" gap="10" direction="column">
+                <HStack
+                  hideBelow="md"
+                  flexShrink="0"
+                  color="colorPalette.fg"
+                  textStyle="sm"
+                  pos="relative"
+                  top="2"
+                  fontWeight="medium"
+                >
+                  <LuSparkle />
+                  Try these
+                </HStack>
+                <HStack wrap="wrap" colorPalette="gray" justify="center">
+                  {prompts.map((prompt) => (
+                    <Button px="3" key={prompt.text} size="xs" rounded="full" variant="outline" onClick={() => handlePromptClick(prompt.text)}>
+                      {prompt.text}
+                    </Button>
+                  ))}
+                </HStack>
+              </Flex>
+            </Container>
+          )}
         </VStack>
       </Center>
     </Container>

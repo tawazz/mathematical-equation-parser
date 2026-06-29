@@ -26,13 +26,13 @@ type ASTNode = NumberNode | BinaryNode | ComparisonNode;
 
 // ── Parse result types ────────────────────────────────────────────────────────
 
-interface ParseSuccess {
+export interface ParseSuccess {
   success: true;
   ast: ASTNode;
   result: number | boolean;
 }
 
-interface ParseError {
+export interface ParseError {
   success: false;
   ast?: undefined;
   result?: undefined;
@@ -41,7 +41,7 @@ interface ParseError {
   results?: ASTNode[];
 }
 
-type ParseResult = ParseSuccess | ParseError;
+export type ParseResult = ParseSuccess | ParseError;
 
 // Evaluator
 
