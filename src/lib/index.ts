@@ -1,5 +1,5 @@
 import nearley from 'nearley';
-import grammar = require('./grammar');
+import grammar from './grammar';
 
 // AST type definitions
 

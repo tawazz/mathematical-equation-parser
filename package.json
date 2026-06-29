@@ -7,7 +7,6 @@
     "dev": "npm run build:grammar && vite",
     "build": "npm run build:grammar && tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
     "build:grammar": "tsx node_modules/.bin/nearleyc src/lib/grammar.ne -o src/lib/grammar.js",
     "test": "npm run build:grammar && jest"
   },
