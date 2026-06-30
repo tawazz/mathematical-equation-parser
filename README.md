@@ -1,3 +1,10 @@
+# math-eq-parser
+
+[![CI](https://github.com/tawazz/math-eq-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/tawazz/math-eq-parser/actions/workflows/ci.yml)
+[![Deploy](https://github.com/tawazz/math-eq-parser/actions/workflows/deploy.yml/badge.svg)](https://github.com/tawazz/math-eq-parser/actions/workflows/deploy.yml)
+
+A math equation parser built with Nearley + React. Evaluates arithmetic expressions and comparison operators with full operator precedence and parentheses support.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
