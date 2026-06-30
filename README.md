@@ -9,6 +9,10 @@ Enter an arithmetic or comparison expression, and the app will parse it into an 
 
 ---
 
+## Demo
+
+A demo version is available [Here](https://tawazz.github.io/mathematical-equation-parser/)
+
 ## Features
 
 - **Arithmetic operations**: addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`)
