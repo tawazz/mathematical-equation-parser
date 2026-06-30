@@ -7,28 +7,23 @@ import lexer from './lexer';
 # Tell Nearley to use our custom lexer instead of the default
 @lexer lexer
 
-# Top-level rule: an expression is simply a comparison
-# The {% id %} just passes the comparison node through unchanged.
-expression -> comparison {% id %}
+# Top-level rule: an expression is either an assertion (comparison) or a bare addition.
+expression -> assertion {% id %}
 
-# Comparison (equality / inequality) — lowest precedence
-# Matches an `addition` optionally followed by zero or more `(== or !=) addition`.
-# Comparisons are left-associative: `a == b != c` parses as `(a == b) != c`.
-comparison -> addition ((%eq | %neq) addition):* {%
+# Assertion (equality / inequality) — top level only, NOT chainable.
+# Matches `addition = addition` or `addition != addition`.
+assertion -> addition (%eq | %neq) addition {%
   function(d) {
-    // If no comparison operators found, return the left-hand addition as-is
-    if (d[1].length === 0) return d[0];
-    let result = d[0];
-    // Fold over each `(operator, right-hand-side)` pair
-    for (const item of d[1]) {
-      // item = [[token], addition_node] — alternation wraps in an extra array
-      const op   = item[0][0];
-      const right = item[1];
-      result = { type: 'comparison', operator: op.text, left: result, right };
-    }
-    return result;
+    // d[0] = left addition, d[1] = [token] (alternation wraps in array), d[2] = right addition
+    return {
+      type: 'comparison',
+      operator: d[1][0].text,
+      left: d[0],
+      right: d[2],
+    };
   }
 %}
+  | addition {% id %}
 
 # Addition / subtraction — medium precedence 
 # Matches a `multiplication` optionally followed by zero or more `(+ or -) multiplication`.
