@@ -179,21 +179,20 @@ export function parse(input: string): ParseResult {
         ? `. Expected one of: ${expected.slice(0, 5).join(', ')}${expected.length > 5 ? ', …' : ''}`
         : '';
       error = `Unexpected ${displayToken} at line ${position.line}, column ${position.col}${expectedHint}`;
-    } else if (typeof err.line === 'number' && typeof err.col === 'number' && err.offset !== undefined) {
+    } else if (typeof err.line === 'number' && typeof err.col === 'number' && typeof err.offset === 'number') {
       // Moo lexer error (invalid character) — Moo puts line/col/offset directly on Error
       category = 'lexer';
       position = { line: err.line as number, col: err.col as number };
       error = `Invalid character at line ${position.line}, column ${position.col}`;
     } else if (typeof err.offset === 'number') {
-      // Fallback: offset-based error
-      category = 'parser';
-      const inputStr = (parser as unknown as Record<string, unknown>).lexerState as string | undefined;
-      if (inputStr) {
-        const before = inputStr.slice(0, err.offset as number);
-        const lines = before.split('\n');
-        position = { line: lines.length, col: lines[lines.length - 1].length + 1 };
+      const mooMatch = errorObj.message.match(/invalid syntax at line (\d+) col (\d+)/);
+      if (mooMatch) {
+        category = 'lexer';
+        position = { line: parseInt(mooMatch[1], 10), col: parseInt(mooMatch[2], 10) };
+        error = `Invalid character at line ${position.line}, column ${position.col}`;
+      } else {
+        error = errorObj.message;
       }
-      error = `Unexpected input at line ${position?.line ?? '?'}, column ${position?.col ?? '?'}`;
     }
 
     return {

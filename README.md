@@ -39,7 +39,7 @@ Enter an arithmetic or comparison expression, and the app will parse it into an 
 
 ## Prerequisites
 
-- **Node.js** >= 18 (LTS recommended)
+- **Node.js** >= 20 (LTS recommended)
 - **npm** >= 9
 
 ---
