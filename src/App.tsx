@@ -11,6 +11,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { LuArrowRight, LuSparkle } from 'react-icons/lu'
+import { CiRedo } from "react-icons/ci";
 import { parse, type ParseResult } from './lib'
 import { ResultDisplay } from './components/result/ResultDisplay'
 
@@ -42,6 +43,11 @@ export const App = () => {
     setResult(null)
   }
 
+  const handleReset = () => {
+    setExpression('')
+    setResult(null)
+  }
+
   return (
     <Container maxW="4xl" height="full">
       <Center height="full">
@@ -50,7 +56,7 @@ export const App = () => {
             Welcome to the Mathematical Equation Parser
           </Heading>
           <Box textAlign="center" color="colorPalette.fgMuted">
-            <Box as="span" fontWeight="medium">
+            <Box fontWeight="medium">
               Parse mathematical expressions with ease.
             </Box>{' '}
             Enter your expression below and click "Parse expression" to see the result.
@@ -68,12 +74,20 @@ export const App = () => {
                 placeholder="Enter your expression here eg 1 + 2 = 3..."
                 value={expression}
                 onChange={(e) => setExpression(e.target.value)}
+                disabled={result !== null && result.success}
               />
               <HStack px="2" py="2" justify="flex-end">
-                <Button size="xs" onClick={parseExpression}>
-                  Parse expression
-                  <LuArrowRight />
-                </Button>
+                {result === null || !result.success ? (
+                  <Button size="xs" onClick={parseExpression} disabled={result !== null && result.success}>
+                    Parse expression
+                    <LuArrowRight />
+                  </Button>
+                ) : (
+                  <Button size="xs" variant="outline" onClick={handleReset}>
+                    <CiRedo />
+                    Try another expression
+                  </Button>
+                )}
               </HStack>
             </Box>
           </Box>
