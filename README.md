@@ -1,7 +1,7 @@
 # Mathematical Equation Parser
 
-[![CI](https://github.com/tawazz/math-eq-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/tawazz/math-eq-parser/actions/workflows/ci.yml)
-[![Deploy](https://github.com/tawazz/math-eq-parser/actions/workflows/deploy.yml/badge.svg)](https://github.com/tawazz/math-eq-parser/actions/workflows/deploy.yml)
+[![CI](https://github.com/tawazz/mathematical-equation-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/tawazz/mathematical-equation-parser/actions/workflows/ci.yml)
+[![Deploy](https://github.com/tawazz/mathematical-equation-parser/actions/workflows/deploy.yml/badge.svg)](https://github.com/tawazz/mathematical-equation-parser/actions/workflows/deploy.yml)
 
 A web-based mathematical equation parser built with **React**, **TypeScript**, and **Vite**. It uses [Nearley](https://nearley.js.org/) for parser generation and [Moo](https://github.com/no-context/moo) for lexing/tokenization, and renders the UI with **Chakra UI v3**.
 
@@ -48,7 +48,7 @@ Enter an arithmetic or comparison expression, and the app will parse it into an 
 
 ```bash
 # Clone the repository
-git clone https://github.com/tawazz/math-eq-parser.git
+git clone https://github.com/tawazz/mathematical-equation-parser.git math-eq-parser
 cd math-eq-parser
 
 # Install dependencies

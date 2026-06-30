@@ -19,11 +19,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4.2.1
+      - uses: actions/download-artifact@v4.2.1
         with:
           name: github-pages
           path: dist
-      - uses: actions/configure-pages@983d7736d9fc0ae9e3f3e9c2e5f74d8a1423627b # v5.0.0
+      - uses: actions/configure-pages@v6
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@d6db9016429bee13160e414a1ab7971fb1db1f1a # v4.0.5
+        uses: actions/deploy-pages@v4
