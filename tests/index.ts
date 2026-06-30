@@ -88,4 +88,12 @@ describe('Error handling', () => {
   it('invalid character',        () => assertError(parse('2 + a')));
   it('unclosed paren',           () => assertError(parse('(2 + 3')));
   it('empty input',              () => assertError(parse('')));
+  it('division by zero',         () => {
+    const result = parse('1 / 0');
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error).toBe('Division by zero');
+      expect(result.category).toBe('evaluator');
+    }
+  });
 });

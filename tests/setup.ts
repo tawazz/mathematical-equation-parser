@@ -15,8 +15,12 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Polyfill structuredClone for jsdom (Chakra UI uses it internally)
 if (typeof globalThis.structuredClone !== 'function') {
-  globalThis.structuredClone = (value: unknown) => {
-    if (value === undefined) return undefined
-    return JSON.parse(JSON.stringify(value))
-  }
+  globalThis.structuredClone = function structuredClone<T>(value: T): T {
+    // Handle primitives directly — avoids lossy JSON round-trip for these cases
+    if (value === undefined || value === null) return value;
+    if (typeof value === 'boolean' || typeof value === 'number' || typeof value === 'string') {
+      return value;
+    }
+    return JSON.parse(JSON.stringify(value));
+  } as typeof globalThis.structuredClone;
 }

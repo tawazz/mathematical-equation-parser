@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "build:grammar": "tsx node_modules/.bin/nearleyc src/lib/grammar.ne -o src/lib/grammar.js",
     "test": "npm run build:grammar && jest",
-    "test:parser": "npm run build:grammar && jest --testPathPatterns='tests/index.ts'",
-    "test:components": "jest --testPathPatterns='tests/components/|tests/App.test.tsx'"
+    "test:parser": "npm run build:grammar && jest --testPathPattern='tests/index.ts'",
+    "test:components": "jest --testPathPattern='tests/components/|tests/App.test.tsx'"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.36.0",
@@ -53,7 +53,9 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
-    "setupFiles": ["<rootDir>/tests/setup.ts"],
+    "setupFiles": [
+      "<rootDir>/tests/setup.ts"
+    ],
     "testMatch": [
       "<rootDir>/tests/index.ts",
       "<rootDir>/tests/**/*.test.ts",

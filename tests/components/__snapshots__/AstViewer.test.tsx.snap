@@ -1,0 +1,306 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`AstViewer matches snapshot for a BinaryNode tree 1`] = `
+<div>
+  <script
+    nonce=""
+  >
+    ((e, s, n, l, o, d, u, h) =&gt; { let m = document.documentElement, w = ["light", "dark"]; function p(r) { (Array.isArray(e) ? e : [e]).forEach(y =&gt; { let k = y === "class", S = k && d ? o.map(f =&gt; d[f] || f) : o; k ? (m.classList.remove(...S), m.classList.add(d && d[r] ? d[r] : r)) : m.setAttribute(y, r); }), C(r); } function C(r) { h && w.includes(r) && (m.style.colorScheme = r); } function a() { return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } if (l)
+    p(l);
+else
+    try {
+        let r = localStorage.getItem(s) || n, y = u && r === "system" ? a() : r;
+        p(y);
+    }
+    catch (r) { } })("class","theme","system",null,["light","dark"],null,true,true)
+  </script>
+  <div
+    class="css-1w4wrl6"
+  >
+    <div
+      class="chakra-stack css-gfmpii"
+    >
+      <div
+        class="chakra-stack css-19zh6n9"
+      >
+        <span
+          class="css-c1jjvn"
+        >
+          Binary
+        </span>
+        <div
+          class="css-d98n7c"
+        >
+          +
+        </div>
+      </div>
+      <div
+        class="chakra-stack css-e6a1cc"
+      >
+        <div>
+          <div
+            class="css-ueu8s2"
+          >
+            Left
+          </div>
+          <div
+            class="chakra-stack css-hnhsgj"
+          >
+            <span
+              class="css-nb12fr"
+            >
+              Number
+            </span>
+            <div
+              class="css-o4yb8q"
+            >
+              1
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="css-ueu8s2"
+          >
+            Right
+          </div>
+          <div
+            class="chakra-stack css-gfmpii"
+          >
+            <div
+              class="chakra-stack css-19zh6n9"
+            >
+              <span
+                class="css-c1jjvn"
+              >
+                Binary
+              </span>
+              <div
+                class="css-d98n7c"
+              >
+                ×
+              </div>
+            </div>
+            <div
+              class="chakra-stack css-e6a1cc"
+            >
+              <div>
+                <div
+                  class="css-ueu8s2"
+                >
+                  Left
+                </div>
+                <div
+                  class="chakra-stack css-hnhsgj"
+                >
+                  <span
+                    class="css-nb12fr"
+                  >
+                    Number
+                  </span>
+                  <div
+                    class="css-o4yb8q"
+                  >
+                    2
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div
+                  class="css-ueu8s2"
+                >
+                  Right
+                </div>
+                <div
+                  class="chakra-stack css-hnhsgj"
+                >
+                  <span
+                    class="css-nb12fr"
+                  >
+                    Number
+                  </span>
+                  <div
+                    class="css-o4yb8q"
+                  >
+                    3
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AstViewer matches snapshot for a ComparisonNode with nested arithmetic 1`] = `
+<div>
+  <script
+    nonce=""
+  >
+    ((e, s, n, l, o, d, u, h) =&gt; { let m = document.documentElement, w = ["light", "dark"]; function p(r) { (Array.isArray(e) ? e : [e]).forEach(y =&gt; { let k = y === "class", S = k && d ? o.map(f =&gt; d[f] || f) : o; k ? (m.classList.remove(...S), m.classList.add(d && d[r] ? d[r] : r)) : m.setAttribute(y, r); }), C(r); } function C(r) { h && w.includes(r) && (m.style.colorScheme = r); } function a() { return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } if (l)
+    p(l);
+else
+    try {
+        let r = localStorage.getItem(s) || n, y = u && r === "system" ? a() : r;
+        p(y);
+    }
+    catch (r) { } })("class","theme","system",null,["light","dark"],null,true,true)
+  </script>
+  <div
+    class="css-1w4wrl6"
+  >
+    <div
+      class="chakra-stack css-gfmpii"
+    >
+      <div
+        class="chakra-stack css-1nqo8vv"
+      >
+        <span
+          class="css-1xbw8dz"
+        >
+          Comparison
+        </span>
+        <div
+          class="css-fedm2v"
+        >
+          =
+        </div>
+      </div>
+      <div
+        class="chakra-stack css-ivdwk"
+      >
+        <div>
+          <div
+            class="css-ueu8s2"
+          >
+            Left
+          </div>
+          <div
+            class="chakra-stack css-gfmpii"
+          >
+            <div
+              class="chakra-stack css-19zh6n9"
+            >
+              <span
+                class="css-c1jjvn"
+              >
+                Binary
+              </span>
+              <div
+                class="css-d98n7c"
+              >
+                +
+              </div>
+            </div>
+            <div
+              class="chakra-stack css-e6a1cc"
+            >
+              <div>
+                <div
+                  class="css-ueu8s2"
+                >
+                  Left
+                </div>
+                <div
+                  class="chakra-stack css-hnhsgj"
+                >
+                  <span
+                    class="css-nb12fr"
+                  >
+                    Number
+                  </span>
+                  <div
+                    class="css-o4yb8q"
+                  >
+                    1
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div
+                  class="css-ueu8s2"
+                >
+                  Right
+                </div>
+                <div
+                  class="chakra-stack css-hnhsgj"
+                >
+                  <span
+                    class="css-nb12fr"
+                  >
+                    Number
+                  </span>
+                  <div
+                    class="css-o4yb8q"
+                  >
+                    2
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="css-ueu8s2"
+          >
+            Right
+          </div>
+          <div
+            class="chakra-stack css-hnhsgj"
+          >
+            <span
+              class="css-nb12fr"
+            >
+              Number
+            </span>
+            <div
+              class="css-o4yb8q"
+            >
+              3
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AstViewer matches snapshot for a NumberNode leaf 1`] = `
+<div>
+  <script
+    nonce=""
+  >
+    ((e, s, n, l, o, d, u, h) =&gt; { let m = document.documentElement, w = ["light", "dark"]; function p(r) { (Array.isArray(e) ? e : [e]).forEach(y =&gt; { let k = y === "class", S = k && d ? o.map(f =&gt; d[f] || f) : o; k ? (m.classList.remove(...S), m.classList.add(d && d[r] ? d[r] : r)) : m.setAttribute(y, r); }), C(r); } function C(r) { h && w.includes(r) && (m.style.colorScheme = r); } function a() { return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } if (l)
+    p(l);
+else
+    try {
+        let r = localStorage.getItem(s) || n, y = u && r === "system" ? a() : r;
+        p(y);
+    }
+    catch (r) { } })("class","theme","system",null,["light","dark"],null,true,true)
+  </script>
+  <div
+    class="css-1w4wrl6"
+  >
+    <div
+      class="chakra-stack css-hnhsgj"
+    >
+      <span
+        class="css-nb12fr"
+      >
+        Number
+      </span>
+      <div
+        class="css-o4yb8q"
+      >
+        42
+      </div>
+    </div>
+  </div>
+</div>
+`;

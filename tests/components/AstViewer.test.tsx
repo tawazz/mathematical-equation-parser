@@ -147,4 +147,43 @@ describe('AstViewer', () => {
     expect(screen.getByText('Comparison')).toBeInTheDocument()
     expect(screen.getByText('Binary')).toBeInTheDocument()
   })
+
+  // Snapshot tests
+
+  it('matches snapshot for a NumberNode leaf', () => {
+    const { container } = render(<AstViewer ast={{ type: 'number', value: 42 }} />)
+    expect(container).toMatchSnapshot()
+  })
+
+  it('matches snapshot for a BinaryNode tree', () => {
+    const ast: ASTNode = {
+      type: 'binary',
+      operator: '+',
+      left: { type: 'number', value: 1 },
+      right: {
+        type: 'binary',
+        operator: '*',
+        left: { type: 'number', value: 2 },
+        right: { type: 'number', value: 3 },
+      },
+    }
+    const { container } = render(<AstViewer ast={ast} />)
+    expect(container).toMatchSnapshot()
+  })
+
+  it('matches snapshot for a ComparisonNode with nested arithmetic', () => {
+    const ast: ASTNode = {
+      type: 'comparison',
+      operator: '=',
+      left: {
+        type: 'binary',
+        operator: '+',
+        left: { type: 'number', value: 1 },
+        right: { type: 'number', value: 2 },
+      },
+      right: { type: 'number', value: 3 },
+    }
+    const { container } = render(<AstViewer ast={ast} />)
+    expect(container).toMatchSnapshot()
+  })
 })
