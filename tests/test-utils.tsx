@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import '@testing-library/jest-dom/jest-globals'
 import { type ReactElement } from 'react'
 import { render, type RenderOptions } from '@testing-library/react'
