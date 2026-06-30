@@ -3,9 +3,10 @@
   "compilerOptions": {
     "allowJs": true,
     "esModuleInterop": true,
-    "types": ["node"],
+    "types": ["node", "@testing-library/jest-dom"],
     "verbatimModuleSyntax": false,
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
   "include": ["src", "tests"]
 }

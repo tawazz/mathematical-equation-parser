@@ -8,7 +8,9 @@
     "build": "npm run build:grammar && tsc -b && vite build",
     "lint": "eslint .",
     "build:grammar": "tsx node_modules/.bin/nearleyc src/lib/grammar.ne -o src/lib/grammar.js",
-    "test": "npm run build:grammar && jest"
+    "test": "npm run build:grammar && jest",
+    "test:parser": "npm run build:grammar && jest --testPathPatterns='tests/index.ts'",
+    "test:components": "jest --testPathPatterns='tests/components/|tests/App.test.tsx'"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.36.0",
@@ -25,6 +27,9 @@
     "@eslint/js": "^10.0.1",
     "@jest/globals": "^30.4.1",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/babel__core": "^7.20.5",
     "@types/moo": "^0.5.10",
     "@types/nearley": "^2.11.5",
@@ -38,6 +43,7 @@
     "eslint-plugin-react-refresh": "^0.5.3",
     "globals": "^17.7.0",
     "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
     "ts-jest": "^29.4.11",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
@@ -46,21 +52,45 @@
   },
   "jest": {
     "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "setupFiles": ["<rootDir>/tests/setup.ts"],
     "testMatch": [
-      "<rootDir>/tests/index.ts"
+      "<rootDir>/tests/index.ts",
+      "<rootDir>/tests/**/*.test.ts",
+      "<rootDir>/tests/**/*.test.tsx"
     ],
     "moduleFileExtensions": [
       "ts",
+      "tsx",
       "js",
+      "jsx",
       "json"
     ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!.*(@chakra-ui|@emotion|@ark-ui|@zag-js|framesync|next-themes|react-icons)/)"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
     "transform": {
-      "^.+\\.tsx?$": ["ts-jest", {
-        "tsconfig": "tsconfig.test.json"
-      }],
-      "^.+\\.jsx?$": ["ts-jest", {
-        "tsconfig": "tsconfig.test.json"
-      }]
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.test.json"
+        }
+      ],
+      "^.+\\.jsx?$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.test.json"
+        }
+      ],
+      "^.+\\.m?js$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.test.json"
+        }
+      ]
     }
   }
 }
