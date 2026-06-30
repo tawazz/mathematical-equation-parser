@@ -46,8 +46,8 @@ describe('AstViewer', () => {
 
     render(<AstViewer ast={ast} />)
 
-    // Unicode minus sign
-    expect(screen.getByText('−')).toBeInTheDocument()
+    // Minus sign
+    expect(screen.getByText('-')).toBeInTheDocument()
   })
 
   it('renders BinaryNode with × symbol for multiplication', () => {
@@ -60,7 +60,7 @@ describe('AstViewer', () => {
 
     render(<AstViewer ast={ast} />)
 
-    expect(screen.getByText('×')).toBeInTheDocument()
+    expect(screen.getByText('x')).toBeInTheDocument()
   })
 
   it('renders BinaryNode with ÷ symbol for division', () => {

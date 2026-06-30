@@ -1,6 +1,7 @@
 import nearley from 'nearley';
 import grammar from './grammar';
 import { generateSuggestion } from './suggestions';
+import { getOperator } from './operators';
 
 // AST type definitions
 
@@ -71,29 +72,18 @@ function evaluate(node: ASTNode): number | boolean {
     case 'number':
       return node.value;
 
-    case 'binary': {
-      const left = evaluate(node.left);
-      const right = evaluate(node.right);
-      switch (node.operator) {
-        case '+': return (left as number) + (right as number);
-        case '-': return (left as number) - (right as number);
-        case '*': return (left as number) * (right as number);
-        case '/':
-          if (right === 0) throw new EvaluatorError('Division by zero');
-          return (left as number) / (right as number);
-        default:
-          throw new EvaluatorError(`Unknown arithmetic operator: ${node.operator}`);
-      }
-    }
-
+    case 'binary':
     case 'comparison': {
-      const left = evaluate(node.left);
-      const right = evaluate(node.right);
-      switch (node.operator) {
-        case '=':  return left === right;
-        case '!=': return left !== right;
-        default:
-          throw new EvaluatorError(`Unknown comparison operator: ${node.operator}`);
+      const left = evaluate(node.left) as number;
+      const right = evaluate(node.right) as number;
+      const op = getOperator(node.operator);
+      if (!op) {
+        throw new EvaluatorError(`Unknown operator: ${node.operator}`);
+      }
+      try {
+        return op.eval(left, right);
+      } catch (e: unknown) {
+        throw new EvaluatorError((e as Error).message);
       }
     }
 

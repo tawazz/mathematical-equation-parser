@@ -1,5 +1,6 @@
 import { Box, HStack, Stack } from '@chakra-ui/react'
 import type { ASTNode } from '../../lib'
+import { getOperator } from '../../lib/operators'
 
 // ── Node colour & label map ───────────────────────────────────────────────────
 
@@ -7,17 +8,6 @@ const nodeMeta: Record<ASTNode['type'], { label: string; accent: string }> = {
   number:     { label: 'Number',     accent: 'teal' },
   binary:     { label: 'Binary',     accent: 'blue' },
   comparison: { label: 'Comparison', accent: 'purple' },
-}
-
-// ── Operator display map ─────────────────────────────────────────────────────
-
-const operatorSymbols: Record<string, string> = {
-  '+': '+',
-  '-': '−',
-  '*': '×',
-  '/': '÷',
-  '=': '=',
-  '!=': '≠',
 }
 
 // ── Recursive AST node renderer ───────────────────────────────────────────────
@@ -63,7 +53,8 @@ const AstNodeView = ({ node }: AstNodeViewProps) => {
   }
 
   // ── Internal node: BinaryNode | ComparisonNode ────────────────────────────
-  const opSymbol = operatorSymbols[node.operator] ?? node.operator
+  const opDef = getOperator(node.operator)
+  const opSymbol = opDef?.display ?? node.operator
 
   return (
     <Stack gap="0">
